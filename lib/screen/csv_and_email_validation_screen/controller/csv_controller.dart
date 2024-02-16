@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:accout_checker/models/csv_model.dart';
 import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class CsvController extends GetxController {
+  var csvEmailList = [].obs;
   Future<void> pickCSV() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -23,7 +25,10 @@ class CsvController extends GetxController {
             .transform(CsvToListConverter())
             .toList();
             fields.removeAt(0);
-        log('fasdfadss: ' +  jsonEncode(fields[0]));
+            for(int i = 0; i < fields.length; i++) {
+
+            }
+        log('fasdfadss: ' +  csvModelFromJson(jsonEncode(fields[0])).first);
       } else {
         // User canceled the picker
         print('User canceled the file picker');
